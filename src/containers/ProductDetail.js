@@ -6,17 +6,17 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   selectedProduct,
   removeSelectedProduct,
-} from "../redux/actions/productsActions";
+} from "../redux/actions/productActions";
 
-const ProductDetails = () => {
+const ProductDetail = () => {
   const { productId } = useParams();
   let product = useSelector((state) => state.product);
   const { image, title, price, category, description } = product;
   const dispatch = useDispatch();
 
-  const fetchProductDetail = async (id) => {
+  const fetchProductDetail = async () => {
     const response = await axios
-      .get(`https://fakestoreapi.com/products/${id}`)
+      .get(`https://dummyjson.com/products/${productId}`)
       .catch((err) => {
         console.log("Error: ", err);
       });
@@ -24,7 +24,7 @@ const ProductDetails = () => {
   };
 
   useEffect(() => {
-    if (productId && productId !== "") fetchProductDetail(productId);
+    if (productId && productId !== "") fetchProductDetail();
     return () => {
       dispatch(removeSelectedProduct());
     };
@@ -36,10 +36,10 @@ const ProductDetails = () => {
       ) : (
         <div className="ui placeholder segment">
           <div className="ui two column stackable center aligned grid">
-            <div className="ui vertical divider">AND</div>
+            {/* <div className="ui vertical divider">AND</div> */}
             <div className="middle aligned row">
               <div className="column lp">
-                <img className="ui fluid image" src={image} />
+                <img className="ui fluid image" src={image} alt="" />
               </div>
               <div className="column rp">
                 <h1>{title}</h1>
@@ -63,4 +63,4 @@ const ProductDetails = () => {
   );
 };
 
-export default ProductDetails;
+export default ProductDetail;

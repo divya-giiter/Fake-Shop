@@ -1,9 +1,16 @@
 import { ActionTypes } from "../constants/action-types";
+
 const intialState = {
-  products: [],
+  products: [
+    {
+      id: 1,
+      title: "Divya",
+      category: "studnt",
+    },
+  ],
 };
 
-export const productsReducer = (state = intialState, { type, payload }) => {
+export const productReducer = (state = intialState, { type, payload }) => {
   switch (type) {
     case ActionTypes.SET_PRODUCTS:
       return { ...state, products: payload };
@@ -12,7 +19,7 @@ export const productsReducer = (state = intialState, { type, payload }) => {
   }
 };
 
-export const selectedProductsReducer = (state = {}, { type, payload }) => {
+export const selectedProductReducer = (state = {}, { type, payload }) => {
   console.log(type);
   switch (type) {
     case ActionTypes.SELECTED_PRODUCT:
